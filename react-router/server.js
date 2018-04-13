@@ -2,7 +2,7 @@ const express = require('express'),
       app = express();
 
 //requiring the basic_router.js
-app.use('/users',require('./react-router/basic_router'));
+app.use('/users',require('.react-router/basic_router'));
 
 //routes
 app.get('/posts/newpost',(request,response)=>{
