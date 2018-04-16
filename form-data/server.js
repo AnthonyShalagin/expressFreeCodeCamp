@@ -1,19 +1,27 @@
-//server.js file
+//server.js
 
 const express = require('express'),
-      app = express();
+      app = express(),
+      
+//You must require the body-parser middleware to access request.body in express
+bodyParser = require('body-parser');
 
-//setting the port 
+//configuring bodyparser
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+//setting our port
 app.set('port', process.env.PORT || 3000);
 
-//
+//Get route for localhost:3000
 app.get('/',(request,response)=>{
   response.sendFile(__dirname +'/form.html');
 });
 
-app.get('/process',(request,response)=>{
-  console.log(request.query);
-  response.send(`${request.query.name} said ${request.query.message}`);
+//POST route for form handling
+app.post('/',(request,response)=>{
+  console.log(request.body);  
+  response.send(`${request.body.name} said ${request.body.message}`);
 });
 
 app.listen(3000,()=>{
